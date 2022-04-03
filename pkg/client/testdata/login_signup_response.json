@@ -1,0 +1,31 @@
+{
+  "user": {
+    "id": "string",
+    "firstName": "string",
+    "lastName": "string",
+    "email": "string",
+    "phone": "string",
+    "phoneIsoCountry": "string",
+    "avatarType": "LINKEDIN",
+    "avatarUrl": "string",
+    "createdAt": "string",
+    "updatedAt": "string",
+    "currency": "USD",
+    "locale": "string",
+    "timezone": "string",
+    "verified": true,
+    "hasExpensifyLink": true,
+    "quickbooksTokenId": "string",
+    "employeeId": "string",
+    "issuerSanctions": [
+      {
+        "name": "string",
+        "status": "PASS"
+      }
+    ],
+    "organizationId": "string",
+    "organizationRole": "string"
+  },
+  "token": "abc123DEF456ghi789JKL012",
+  "refreshToken": "abc123DEF456ghi789JKL012"
+}

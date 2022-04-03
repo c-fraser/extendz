@@ -1,0 +1,7 @@
+bin
+out
+.gradle
+.idea
+*.iml
+.DS_Store
+vendor
