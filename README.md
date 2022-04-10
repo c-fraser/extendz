@@ -2,12 +2,17 @@
 
 Utilities for interacting with the [Extend API](https://developer.paywithextend.com/#extend-api).
 
+## CLI
+
+The [CLI application](cmd/cli) enables [client operations](#client) to be executed via the command
+line.
+
 ## Client
 
 The [client package](pkg/client) contains a REST client for
 the [Extend API](https://developer.paywithextend.com/#extend-api).
 
-### Features
+### Operations
 
 - [X] Authentication
     - [X] Sign In
@@ -16,15 +21,15 @@ the [Extend API](https://developer.paywithextend.com/#extend-api).
     - [X] Forgot Password
 - [ ] Virtual Cards
     - [X] Get User Virtual Cards
-    - [ ] Get Virtual Card
+    - [X] Get Virtual Card
     - [ ] Get Virtual Card History
-    - [ ] Get Virtual Card Transactions
-    - [ ] Create Virtual Card
-    - [ ] Update Virtual Card
+    - [X] Get Virtual Card Transactions
+    - [X] Create Virtual Card
+    - [X] Update Virtual Card
     - [ ] Update Virtual Card Customer Support Code
-    - [ ] Cancel Virtual Card
+    - [X] Cancel Virtual Card
     - [ ] Cancel Virtual Card Update Request
-    - [ ] Reject Virtual Card
+    - [X] Reject Virtual Card
     - [ ] Get Virtual Card Permissions
     - [ ] Bulk Virtual Card Push
     - [ ] Get Bulk Push XLSX Template

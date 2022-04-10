@@ -1,0 +1,42 @@
+{
+  "creditCardId": "cc_1234",
+  "recipient": "demo@paywithextend.com",
+  "recipientFirstName": "Jane",
+  "recipientLastName": "Doe",
+  "cardholder": "demo@paywithextend.com",
+  "displayName": "My Virtual Card",
+  "referenceFields": [
+    {
+      "fieldCode": "COMPCODE",
+      "optionCode": "ABC123"
+    }
+  ],
+  "notes": "It was the best of times, it was the worst of times.",
+  "balanceCents": 400000,
+  "direct": false,
+  "currency": "USD",
+  "validFrom": "2020-01-01T01:01:12.123+0000",
+  "validTo": "2020-01-01T01:01:12.123+0000",
+  "recurs": true,
+  "recurrence": {
+    "balanceCents": 400000,
+    "RecurrencePeriod": "WEEKLY",
+    "interval": 2,
+    "RecurrenceTerminator": "COUNT",
+    "count": 10,
+    "resetCount": true,
+    "until": "2022-01-01T00:00:00.000+0000",
+    "byWeekDay": 0,
+    "byMonthDay": 1,
+    "byYearDay": 1
+  },
+  "receiptAttachmentIds": [
+    "string"
+  ],
+  "validMccRanges": [
+    {
+      "lowest": "1234",
+      "highest": "5678"
+    }
+  ]
+}

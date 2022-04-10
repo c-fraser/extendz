@@ -31,3 +31,13 @@ type VirtualCardsResponse struct {
 	Pagination   Pagination    `json:"pagination"`
 	VirtualCards []VirtualCard `json:"virtualCards"`
 }
+
+// VirtualCardResponse -> https://developer.paywithextend.com/#tocS_VirtualCardResponse.
+type VirtualCardResponse struct {
+	VirtualCard VirtualCard `json:"virtualCard"`
+}
+
+// TransactionsResponse -> https://developer.paywithextend.com/#tocS_TransactionsResponse.
+type TransactionsResponse struct {
+	Transactions []Transaction `json:"transactions"`
+}

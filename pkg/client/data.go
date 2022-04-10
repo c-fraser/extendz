@@ -19,7 +19,7 @@ type User struct {
 	ID                string            `json:"id"`
 	FirstName         string            `json:"firstName"`
 	LastName          string            `json:"lastName"`
-	Email             string            `json:"testEmail"`
+	Email             string            `json:"email"`
 	Phone             string            `json:"phone"`
 	PhoneIsoCountry   string            `json:"phoneIsoCountry"`
 	AvatarType        string            `json:"avatarType"`
@@ -162,6 +162,71 @@ type VirtualCardFeature struct {
 
 // MccRange -> https://developer.paywithextend.com/#tocS_MccRange.
 type MccRange struct {
-	Lowest  int `json:"lowest"`
-	Highest int `json:"highest"`
+	Lowest  string `json:"lowest"`
+	Highest string `json:"highest"`
+}
+
+// Transaction -> https://developer.paywithextend.com/#tocS_TransactionListItem.
+type Transaction struct {
+	ID                          string           `json:"id"`
+	CardholderID                string           `json:"cardholderId"`
+	CardholderName              string           `json:"cardholderName"`
+	CardholderEmail             string           `json:"cardholderEmail"`
+	RecipientName               string           `json:"recipientName"`
+	RecipientEmail              string           `json:"recipientEmail"`
+	RecipientID                 string           `json:"recipientId"`
+	NameOnCard                  string           `json:"nameOnCard"`
+	Source                      string           `json:"source"`
+	VcnLast4                    string           `json:"vcnLast4"`
+	VcnDisplayName              string           `json:"vcnDisplayName"`
+	VirtualCardID               string           `json:"virtualCardId"`
+	Type                        string           `json:"type"`
+	Status                      string           `json:"status"`
+	DeclineReasons              []DeclineReason  `json:"declineReasons"`
+	ApprovalCode                string           `json:"approvalCode"`
+	AuthBillingAmountCents      int              `json:"authBillingAmountCents"`
+	AuthBillingCurrency         string           `json:"authBillingCurrency"`
+	AuthMerchantAmountCents     int              `json:"authMerchantAmountCents"`
+	AuthMerchantCurrency        string           `json:"authMerchantCurrency"`
+	AuthExchangeRate            float64          `json:"authExchangeRate"`
+	ClearingBillingAmountCents  int              `json:"clearingBillingAmountCents"`
+	ClearingBillingCurrency     string           `json:"clearingBillingCurrency"`
+	ClearingMerchantAmountCents int              `json:"clearingMerchantAmountCents"`
+	ClearingMerchantCurrency    string           `json:"clearingMerchantCurrency"`
+	ClearingExchangeRate        float64          `json:"clearingExchangeRate"`
+	Mcc                         string           `json:"mcc"`
+	MccGroup                    string           `json:"mccGroup"`
+	MccDescription              string           `json:"mccDescription"`
+	MerchantID                  string           `json:"merchantId"`
+	MerchantName                string           `json:"merchantName"`
+	MerchantAddress             string           `json:"merchantAddress"`
+	MerchantCity                string           `json:"merchantCity"`
+	MerchantState               string           `json:"merchantState"`
+	MerchantCountry             string           `json:"merchantCountry"`
+	MerchantZip                 string           `json:"merchantZip"`
+	AuthedAt                    string           `json:"authedAt"`
+	ClearedAt                   string           `json:"clearedAt"`
+	UpdatedAt                   string           `json:"updatedAt"`
+	HasAttachments              bool             `json:"hasAttachments"`
+	ReferenceID                 string           `json:"referenceId"`
+	CreditCardID                string           `json:"creditCardId"`
+	SentToExpensify             bool             `json:"sentToExpensify"`
+	SentToQuickbooks            bool             `json:"sentToQuickbooks"`
+	AttachmentsCount            int              `json:"attachmentsCount"`
+	ReferenceFields             []ReferenceField `json:"referenceFields"`
+	CreditCardDisplayName       string           `json:"creditCardDisplayName"`
+}
+
+// DeclineReason -> https://developer.paywithextend.com/#tocS_DeclineReason.
+type DeclineReason struct {
+	Code        string `json:"code"`
+	Description string `json:"description"`
+}
+
+// ReferenceField -> https://developer.paywithextend.com/#tocS_AppliedReferenceField.
+type ReferenceField struct {
+	FieldLabel  string `json:"fieldLabel"`
+	FieldCode   string `json:"fieldCode"`
+	OptionLabel string `json:"optionLabel"`
+	OptionCode  string `json:"optionCode"`
 }

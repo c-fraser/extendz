@@ -1,0 +1,170 @@
+{
+  "virtualCard": {
+    "id": "vc_1234",
+    "status": "ACTIVE",
+    "recipientId": "u_1234",
+    "recipient": {
+      "id": "string",
+      "firstName": "string",
+      "lastName": "string",
+      "email": "string",
+      "phone": "string",
+      "phoneIsoCountry": "string",
+      "avatarType": "LINKEDIN",
+      "avatarUrl": "string",
+      "createdAt": "string",
+      "updatedAt": "string",
+      "currency": "USD",
+      "locale": "string",
+      "timezone": "string",
+      "verified": true,
+      "hasExpensifyLink": true,
+      "quickbooksTokenId": "string",
+      "employeeId": "string",
+      "issuerSanctions": [
+        {
+          "name": "string",
+          "status": "["
+        }
+      ],
+      "organizationId": "string",
+      "organizationRole": "string"
+    },
+    "cardholderId": "string",
+    "cardholder": {
+      "id": "string",
+      "firstName": "string",
+      "lastName": "string",
+      "email": "string",
+      "phone": "string",
+      "phoneIsoCountry": "string",
+      "avatarType": "LINKEDIN",
+      "avatarUrl": "string",
+      "createdAt": "string",
+      "updatedAt": "string",
+      "currency": "USD",
+      "locale": "string",
+      "timezone": "string",
+      "verified": true,
+      "hasExpensifyLink": true,
+      "quickbooksTokenId": "string",
+      "employeeId": "string",
+      "issuerSanctions": [
+        {
+          "name": "string",
+          "status": "["
+        }
+      ],
+      "organizationId": "string",
+      "organizationRole": "string"
+    },
+    "cardImage": {
+      "id": "im_1234",
+      "contentType": "image/png",
+      "urls": {
+        "property1": "string",
+        "property2": "string"
+      },
+      "textColorRGBA": "rgba(255,255,255,1)",
+      "hasTextShadow": true,
+      "shadowTextColorRGBA": "rgba(0,0,0,1)"
+    },
+    "displayName": "My Virtual Card",
+    "expires": "2022-01-01T00:00:00.000+0000",
+    "currency": "USD",
+    "limitCents": 1000000,
+    "balanceCents": 400000,
+    "spentCents": 600000,
+    "lifetimeSpentCents": 600000,
+    "awaitingBudget": false,
+    "last4": "1234",
+    "numberFormat": "cardnumber16",
+    "validFrom": "2020-01-01T01:01:12.123+0000",
+    "validTo": "2020-01-01T01:01:12.123+0000",
+    "inactiveSince": "2020-01-01T01:01:12.123+0000",
+    "timezone": "America/New_York",
+    "creditCardId": "cc_1234",
+    "recurs": true,
+    "recurrence": {
+      "id": "string",
+      "balanceCents": 0,
+      "period": "DAILY",
+      "interval": 0,
+      "terminator": "NONE",
+      "count": 0,
+      "until": "string",
+      "byWeekDay": 0,
+      "byMonthDay": 0,
+      "byYearDay": 0,
+      "prevRecurrenceAt": "string",
+      "nextRecurrenceAt": "string",
+      "currentCount": 0,
+      "remainingCount": 0,
+      "createdAt": "string",
+      "updatedAt": "string"
+    },
+    "pending": {
+      "balanceCents": 0,
+      "validFrom": "string",
+      "validTo": "string",
+      "recurs": true,
+      "activeUntil": "string",
+      "currency": "USD",
+      "recurrence": {
+        "id": "string",
+        "balanceCents": 0,
+        "period": "DAILY",
+        "interval": 0,
+        "terminator": "NONE",
+        "count": 0,
+        "until": "string",
+        "byWeekDay": 0,
+        "byMonthDay": 0,
+        "byYearDay": 0,
+        "prevRecurrenceAt": "string",
+        "nextRecurrenceAt": "string",
+        "currentCount": 0,
+        "remainingCount": 0,
+        "createdAt": "string",
+        "updatedAt": "string"
+      },
+      "receiptAttachments": {}
+    },
+    "notes": "It was the best of times, it was the worst of times.",
+    "createdAt": "2020-01-01T01:01:12.123+0000",
+    "updatedAt": "2020-01-01T01:01:12.123+0000",
+    "address": {
+      "address1": "1234 Place Ave.",
+      "address2": "Apt. B",
+      "city": "New York City",
+      "province": "New York",
+      "postal": "10010",
+      "country": "US"
+    },
+    "direct": true,
+    "features": {
+      "recurrence": true,
+      "customAddress": true,
+      "customMin": true,
+      "customMax": true,
+      "walletsEnabled": "['APPLEPAY', 'GOOGLEPAY']",
+      "mccControl": true,
+      "qboReportEnabled": true
+    },
+    "activeUntil": "string",
+    "minTransactionCents": 0,
+    "maxTransactionCents": 0,
+    "maxTransactionCount": 0,
+    "tokenReferenceIds": "['tok_123', 'tok_abc']",
+    "network": "MASTERCARD",
+    "companyName": "ACME Co.",
+    "creditCardDisplayName": "My Virtual Card",
+    "issuer": "American Express",
+    "validMccRanges": [
+      {
+        "lowest": "1234",
+        "highest": "5678"
+      }
+    ]
+  }
+}

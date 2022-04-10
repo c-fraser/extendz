@@ -1,0 +1,65 @@
+{
+  "transactions": [
+    {
+      "id": "txn_1234",
+      "cardholderId": "u_123",
+      "cardholderName": "Jane Doe",
+      "cardholderEmail": "demo@paywithextend.com",
+      "recipientName": "Jane Doe",
+      "recipientEmail": "demo@paywithextend.com",
+      "recipientId": "u_123",
+      "nameOnCard": "Jane Doe",
+      "source": "VIRTUAL",
+      "vcnLast4": "1234",
+      "vcnDisplayName": "My Virtual Card",
+      "virtualCardId": "vc_1234",
+      "type": "DEBIT",
+      "status": "CLEARED",
+      "declineReasons": [
+        {
+          "code": "ACCOUNT_INACTIVE",
+          "description": "Decline - Do Not Honor"
+        }
+      ],
+      "approvalCode": "ABC1234",
+      "authBillingAmountCents": 400000,
+      "authBillingCurrency": "USD",
+      "authMerchantAmountCents": 400000,
+      "authMerchantCurrency": "USD",
+      "authExchangeRate": 1.2345,
+      "clearingBillingAmountCents": 400000,
+      "clearingBillingCurrency": "USD",
+      "clearingMerchantAmountCents": 400000,
+      "clearingMerchantCurrency": "USD",
+      "clearingExchangeRate": 1.2345,
+      "mcc": "AIRLINE",
+      "mccGroup": "TRAVEL",
+      "mccDescription": "Airplanes",
+      "merchantId": "123456",
+      "merchantName": "ACME Airline Co.",
+      "merchantAddress": "1234 Place Ave.",
+      "merchantCity": "New York City",
+      "merchantState": "New York",
+      "merchantCountry": "US",
+      "merchantZip": "10010",
+      "authedAt": "2020-01-01T01:01:12.123+0000",
+      "clearedAt": "2020-01-01T01:01:12.123+0000",
+      "updatedAt": "2020-01-01T01:01:12.123+0000",
+      "hasAttachments": true,
+      "referenceId": "ABC1234",
+      "creditCardId": "cc_",
+      "sentToExpensify": true,
+      "sentToQuickbooks": true,
+      "attachmentsCount": 1,
+      "referenceFields": [
+        {
+          "fieldLabel": "string",
+          "fieldCode": "string",
+          "optionLabel": "string",
+          "optionCode": "string"
+        }
+      ],
+      "creditCardDisplayName": "ACME Co."
+    }
+  ]
+}

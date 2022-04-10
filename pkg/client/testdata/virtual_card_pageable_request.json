@@ -1,0 +1,18 @@
+{
+  "count": 0,
+  "page": 0,
+  "sortField": "string",
+  "sortDirection": "string",
+  "cardholder": "string",
+  "recipient": "string",
+  "cardholderOrViewer": "string",
+  "creditCardId": "string",
+  "status": "string",
+  "statuses": [
+    "string"
+  ],
+  "issued": true,
+  "pendingRequest": true,
+  "search": "string",
+  "withPermission": "string"
+}

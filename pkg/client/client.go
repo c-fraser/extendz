@@ -20,6 +20,8 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
+	"strconv"
 	"sync/atomic"
 	"time"
 )
@@ -58,8 +60,7 @@ func NewClient(server, email, password string) (*Client, error) {
 		validity: 10 * time.Minute,
 		closed:   make(chan struct{}, 1),
 	}
-	var response LoginSignUpResponse
-	err := c.signIn(&response)
+	response, err := c.signIn()
 	if err != nil {
 		return nil, err
 	}
@@ -81,6 +82,9 @@ func (c *Client) token() string {
 // unauthenticated represents an anonymous request (lack of auth token).
 const unauthenticated = ""
 
+// empty is used to denote the absence of a request payload.
+var empty *any
+
 // refreshToken renews the Client.token automatically according to the Client.validity duration.
 func (c *Client) refreshToken(token string) {
 	for {
@@ -89,8 +93,7 @@ func (c *Client) refreshToken(token string) {
 		case <-c.closed:
 			return
 		default:
-			var response LoginSignUpResponse
-			err := c.renewAuth(token, &response)
+			response, err := c.renewAuth(token)
 			if err != nil {
 				continue
 			}
@@ -107,65 +110,141 @@ func (c *Client) Close() {
 }
 
 // signIn -> https://developer.paywithextend.com/#sign-in.
-func (c *Client) signIn(response *LoginSignUpResponse) error {
-	return do(
+func (c *Client) signIn() (*LoginSignUpResponse, error) {
+	return do[LoginRequest, LoginSignUpResponse](
 		c.client,
 		http.MethodPost,
 		c.server+"/signin",
 		unauthenticated,
-		LoginRequest{Email: c.email, Password: c.password},
-		response)
+		&LoginRequest{Email: c.email, Password: c.password})
 }
 
 // renewAuth -> https://developer.paywithextend.com/#renew-auth.
-func (c *Client) renewAuth(token string, response *LoginSignUpResponse) error {
-	return do(
+func (c *Client) renewAuth(token string) (*LoginSignUpResponse, error) {
+	return do[RefreshTokenLoginRequest, LoginSignUpResponse](
 		c.client,
 		http.MethodPost,
 		c.server+"/renewauth",
 		unauthenticated,
-		RefreshTokenLoginRequest{RefreshToken: token},
-		response)
+		&RefreshTokenLoginRequest{RefreshToken: token})
 }
 
 // signOut -> https://developer.paywithextend.com/#sign-out.
 func (c *Client) signOut() error {
-	response := make(map[string]any)
-	return do(
+	_, err := do[LogoutRequest, any](
 		c.client,
 		http.MethodDelete,
 		c.server+"/signout",
 		c.token(),
-		LogoutRequest{},
-		&response)
+		&LogoutRequest{})
+	return err
 }
 
 // ForgotPassword -> https://developer.paywithextend.com/#forgot-password.
-func (c *Client) ForgotPassword(email string, response *Response) error {
-	return do(
+func (c *Client) ForgotPassword(email string) (*Response, error) {
+	return do[ForgotPasswordRequest, Response](
 		c.client,
 		http.MethodPost,
 		c.server+"/forgot",
 		c.token(),
-		ForgotPasswordRequest{Email: email},
-		response)
+		&ForgotPasswordRequest{Email: email})
 }
 
 // GetUserVirtualCards -> https://developer.paywithextend.com/#get-user-virtual-cards.
-func (c Client) GetUserVirtualCards() error {
-	// TODO
-	return nil
+func (c *Client) GetUserVirtualCards(request *VirtualCardPageableRequest) (*VirtualCardsResponse, error) {
+	return do[VirtualCardPageableRequest, VirtualCardsResponse](
+		c.client,
+		http.MethodGet,
+		c.server+"/virtualcards",
+		c.token(),
+		request)
+}
+
+// GetVirtualCard -> https://developer.paywithextend.com/#get-virtual-card.
+func (c *Client) GetVirtualCard(id string) (*VirtualCardResponse, error) {
+	return do[any, VirtualCardResponse](
+		c.client,
+		http.MethodGet,
+		c.server+"/virtualcards/"+id,
+		c.token(),
+		empty)
+}
+
+// GetVirtualCardTransactions -> https://developer.paywithextend.com/#get-virtual-card-transactions.
+func (c *Client) GetVirtualCardTransactions(id string, count int, before, after, status string) (*TransactionsResponse, error) {
+	v := url.Values{}
+	if count > 0 && count <= 500 {
+		v.Add("count", strconv.Itoa(count))
+	}
+	if before != "" {
+		v.Add("before", before)
+	}
+	if after != "" {
+		v.Add("after", after)
+	}
+	if status != "" {
+		v.Add("status", status)
+	}
+	u := c.server + "/virtualcards/" + id + "/transactions"
+	if len(v) > 0 {
+		u += "?" + v.Encode()
+	}
+	return do[any, TransactionsResponse](c.client, http.MethodGet, u, c.token(), empty)
+}
+
+// CreateVirtualCard -> https://developer.paywithextend.com/#create-virtual-card.
+func (c *Client) CreateVirtualCard(request *CreateVirtualCardRequest) (*VirtualCardResponse, error) {
+	return do[CreateVirtualCardRequest, VirtualCardResponse](
+		c.client,
+		http.MethodPost,
+		c.server+"/virtualcards",
+		c.token(),
+		request)
+}
+
+// UpdateVirtualCard -> https://developer.paywithextend.com/#update-virtual-card.
+func (c *Client) UpdateVirtualCard(id string, request *UpdateVirtualCardRequest) (*VirtualCardResponse, error) {
+	return do[UpdateVirtualCardRequest, VirtualCardResponse](
+		c.client,
+		http.MethodPut,
+		c.server+"/virtualcards/"+id,
+		c.token(),
+		request)
+}
+
+// CancelVirtualCard -> https://developer.paywithextend.com/#cancel-virtual-card.
+func (c *Client) CancelVirtualCard(id string) (*VirtualCardResponse, error) {
+	return do[any, VirtualCardResponse](
+		c.client,
+		http.MethodPut,
+		c.server+"/virtualcards/"+id+"/cancel",
+		c.token(),
+		empty)
+}
+
+// RejectVirtualCard -> https://developer.paywithextend.com/#reject-virtual-card.
+func (c *Client) RejectVirtualCard(id string) (*VirtualCardResponse, error) {
+	return do[any, VirtualCardResponse](
+		c.client,
+		http.MethodPut,
+		c.server+"/virtualcards/"+id+"/reject",
+		c.token(),
+		empty)
 }
 
 // do an HTTP request with the method, url, token, and body, using the client.
-func do[In any, Out any](client *http.Client, method, url, token string, in In, out *Out) error {
-	data, err := json.Marshal(in)
-	if err != nil {
-		return err
+func do[In any, Out any](client *http.Client, method, url, token string, in *In) (*Out, error) {
+	var reader io.Reader
+	if in != nil {
+		data, err := json.Marshal(in)
+		if err != nil {
+			return nil, err
+		}
+		reader = bytes.NewReader(data)
 	}
-	request, err := http.NewRequest(method, url, bytes.NewReader(data))
+	request, err := http.NewRequest(method, url, reader)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	request.Header.Add("Content-Type", "application/json")
 	request.Header.Add("Accept", "application/vnd.paywithextend.v2021-03-12+json")
@@ -174,18 +253,19 @@ func do[In any, Out any](client *http.Client, method, url, token string, in In, 
 	}
 	response, err := client.Do(request)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	defer response.Body.Close()
-	data, err = io.ReadAll(response.Body)
+	data, err := io.ReadAll(response.Body)
 	if err != nil {
-		return err
+		return nil, err
 	}
+	var out Out
 	if len(data) > 0 {
-		err = json.Unmarshal(data, out)
+		err = json.Unmarshal(data, &out)
 		if err != nil {
-			return err
+			return nil, err
 		}
 	}
-	return nil
+	return &out, err
 }
