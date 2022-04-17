@@ -57,15 +57,17 @@ func main() {
 					Name:     "request",
 					Aliases:  []string{"r"},
 					Usage:    "the https://developer.paywithextend.com/#tocS_VirtualCardPageableRequest JSON",
-					Required: true,
+					Required: false,
 				},
 			},
 			Action: func(c *cli.Context) error {
 				s := c.String("request")
 				var request extend.VirtualCardPageableRequest
-				err := json.Unmarshal([]byte(s), &request)
-				if err != nil {
-					return err
+				if s != "" {
+					err := json.Unmarshal([]byte(s), &request)
+					if err != nil {
+						return err
+					}
 				}
 				response, err := client.GetUserVirtualCards(&request)
 				if err != nil {

@@ -19,6 +19,7 @@ package extendz
 // Import tools required by build/utility scripts.
 import (
 	_ "github.com/google/addlicense"
+	_ "github.com/goreleaser/goreleaser"
 	_ "github.com/mitchellh/gox"
 	_ "golang.org/x/tools/cmd/goimports"
 	_ "mvdan.cc/gofumpt"

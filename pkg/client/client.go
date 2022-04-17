@@ -233,7 +233,7 @@ func (c *Client) RejectVirtualCard(id string) (*VirtualCardResponse, error) {
 }
 
 // do an HTTP request with the method, url, token, and body, using the client.
-func do[In any, Out any](client *http.Client, method, url, token string, in *In) (*Out, error) {
+func do[rq any, rs any](client *http.Client, method, url, token string, in *rq) (*rs, error) {
 	var reader io.Reader
 	if in != nil {
 		data, err := json.Marshal(in)
@@ -260,7 +260,7 @@ func do[In any, Out any](client *http.Client, method, url, token string, in *In)
 	if err != nil {
 		return nil, err
 	}
-	var out Out
+	var out rs
 	if len(data) > 0 {
 		err = json.Unmarshal(data, &out)
 		if err != nil {
