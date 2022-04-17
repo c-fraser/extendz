@@ -37,6 +37,6 @@ build: test ## build the CLI application
 	@go build -a -o ./out/extendz ./cmd/cli
 
 release: fmt vet test ## release a version of the project
-	@git tag -a "v${VERSION}"
+	@git tag -a "v${VERSION}" -m "Release v${VERSION}"
 	@git push origin "v${VERSION}"
 	@go run github.com/goreleaser/goreleaser release
