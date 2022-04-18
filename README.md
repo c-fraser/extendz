@@ -1,5 +1,10 @@
 # extendz
 
+[![GoDoc](https://godoc.org/github.com/c-fraser/extendz?status.svg)](https://godoc.org/github.com/c-fraser/extendz)
+[![Release](https://img.shields.io/github/v/release/c-fraser/extendz?logo=github&sort=semver)](https://github.com/c-fraser/extendz/releases)
+[![Go Report Card](https://goreportcard.com/badge/github.com/c-fraser/extendz)](https://goreportcard.com/report/github.com/c-fraser/extendz)
+[![Apache License 2.0](https://img.shields.io/badge/License-Apache2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+
 Utilities for interacting with the [Extend API](https://developer.paywithextend.com/#extend-api).
 
 ## CLI
